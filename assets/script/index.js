@@ -23,40 +23,29 @@ const batColor = select('.batState');
 
 // Operating system
 const readSystem = () => {
+    const userAgent = navigator.userAgent.toLowerCase();
     let deviceName = '';
-    if (navigator.userAgent.match(/Android/i)) {  
-        deviceName = 'Android';
-    } else if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
-        deviceName = 'iOS';
-    } else if (navigator.userAgent.match(/Windows/i)) {
-        deviceName = 'Windows';
-    } else if (navigator.userAgent.match(/Mac/i)) {
-        deviceName = 'Mac';
-    } else {
-        deviceName = 'Unknown';
-    }  
+  
+    deviceName = userAgent.includes('android') ? 'Android' :
+      userAgent.includes('iphone') || userAgent.includes('ipad') || userAgent.includes('ipod') ? 'iOS' :
+      userAgent.includes('windows') ? 'Windows' :
+      userAgent.includes('mac') ? 'Mac' :
+      'Unknown';
    
     let languageUsed = navigator.language || navigator.userLanguage;
     // navigator.language is new property to get browser language sometimes it not work 
     // thts why we se old property navigate.userLanguage
-    
+
     let browserName = navigator.userAgent.toLowerCase();
-    if (browserName.indexOf('firefox') > -1) {  // it is default behaviour of indexOf to return -1 if it fail to find 
-        // > -1 by this , we give situation to it not give -1 
-        browserName = 'Firefox';
-    } else if (browserName.indexOf('edg') > -1) {
-        browserName = 'Microsoft Edge';
-    } else if (browserName.indexOf('chrome') > -1) {
-        browserName = 'Chrome';
-    } else if (browserName.indexOf('safari') > -1) {
-        browserName = 'Safari';
-    } else if (browserName.indexOf('opera') > -1) {
-        browserName = 'Opera';
-    } else if (browserName.indexOf('msie') > -1 || browserName.indexOf('trident') > -1) {
-        browserName = 'Internet Explorer';
-    } else {
-        browserName = 'Unknown';
-    }
+     browserName = browserName.indexOf('firefox') > -1 ? 'Firefox' :// it is default behaviour of indexOf to return -1 if it fail to find 
+// > -1 by this , we give situation to it not give -1 
+     browserName.indexOf('edg') > -1 ? 'Microsoft Edge' :
+     browserName.indexOf('chrome') > -1 ? 'Chrome' :
+     browserName.indexOf('safari') > -1 ? 'Safari' :
+     browserName.indexOf('opera') > -1 ? 'Opera' :
+     browserName.indexOf('msie') > -1 || browserName.indexOf('trident') > -1 ? 'Internet Explorer' :
+    'Unknown';
+
   
     deviceType.innerText = `OS:  ${deviceName}`;
     languageType.innerText = `Language:  ${languageUsed}`;
@@ -121,9 +110,9 @@ window.addEventListener('offline', updateState);
 
 
 
-// EXPLANATION 
+// PERSONAL NOTES
 
- navigator.userAgent.match(/Android/i)
+//  navigator.userAgent.match(/Android/i)
  // (i) is a flag that signifies case-insensitive matching. This means that the regex will match the text 
 // "Android" regardless of whether it is written in uppercase, lowercase, or any combination of the two.
 
@@ -132,7 +121,7 @@ window.addEventListener('offline', updateState);
 // JavaScript
 // const str = "This is a test string, with another test";
 // const matches = 
-str.match(/test/g); // ["test", "test"]
+// str.match(/test/g); // ["test", "test"]
 
 
 // then method (promise)
@@ -150,9 +139,6 @@ In the code, the checkBattery function plays the role of your friend telling you
 
 The then method allows you to specify a callback function (checkBattery in this case) that will
  be executed once the Promise is successfully resolved. This means that the checkBattery function
-will only be called after navigator.getBattery() has successfully retrieved the battery information.
-
-
-
+will only be called after navigator.getBattery() has successfully retrieved the battery information
 
 */
